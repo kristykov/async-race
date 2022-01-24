@@ -8,6 +8,11 @@ import { IWinners } from '../interfaces/IWinners';
 class Controller {
   model: Model;
   view: AppView;
+  animations: {
+    [carId: string]: {
+      id: number | null;
+    };
+  } = {};
 
   constructor() {
     this.model = new Model();
@@ -63,7 +68,6 @@ class Controller {
       color: color,
       id: ++this.model.idCounter,
     };
-    console.log(data);
 
     this.model.createCar(data);
     this.refreshPage();
@@ -76,7 +80,6 @@ class Controller {
       color: color,
       id: id,
     };
-    console.log('updateCar controller');
 
     this.model.updateCar(id.toString(), data);
     this.refreshPage();
@@ -156,7 +159,12 @@ class Controller {
       `.car-svg[data-cid="${carId}"]`
     ) as HTMLElement;
 
-    this.animation(car, 1, 1);
+    if (this.animations[carId]) {
+      const anim = this.animations[carId];
+      if (anim.id) {
+        window.cancelAnimationFrame(anim.id);
+      }
+    }
   }
 
   async startDriving(carId: string, context?: this) {
@@ -166,7 +174,7 @@ class Controller {
     const startBtn = document.querySelector(
       `button[data-engine-start-id="${carId}"]`
     ) as HTMLButtonElement;
-
+    if (!startBtn) return { success: false, carId, time: 0 };
     startBtn.disabled = true;
 
     // enable stop btn
@@ -174,7 +182,6 @@ class Controller {
 
     const { velocity, distance } = await context.model.startEngine(carId);
     const time = Math.round(distance / velocity);
-    console.log(time);
 
     const car = document.querySelector(
       `.car-svg[data-cid="${carId}"]`
@@ -185,7 +192,8 @@ class Controller {
     if (success) {
       const flag = document.querySelector('.finish-line') as HTMLElement;
       const htmlDist = Math.floor(context.getDistElem(car, flag));
-      context.animation(car, htmlDist, time);
+
+      this.animations[carId] = context.animation(car, htmlDist, time);
     }
     return { success, carId, time };
   }
