@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" th:href="@{../style.css}" /> -->
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>AsyncRacer</title>
+  <script defer src="app.js"></script></head>
+
+  <body>
+    <main>
+      <nav>
+        <!-- <button class="green-btn" id="garage-btn">To Garage</button>
+            <button class="green-btn" id="winners-btn">To Winners</button> -->
+        <a class="green-btn href-btn" id="garage-btn" href="#garage"
+          >To Garage</a
+        >
+        <a class="green-btn href-btn" id="winners-btn" href="#winners"
+          >To Winners</a
+        >
+        <h1 class="logo">AsyncRacer</h1>
+      </nav>
+      <div class="page-container" id="page-container"></div>
+
+      <!-- <section class="settings-section">
+            <div class="color-section">
+                <input type="text" id="create-name-display"></input>
+                <input type="color" id="create-color" name="create-color" value="#cbdae5" />
+                <button class="blue-btn" id="create-btn">Create</button>
+            </div>
+            <div class="color-section">
+                <input type="text" id="update-name-display"></input>
+                <input type="color" id="update-color" name="update-color" value="#798791" />
+                <button class="blue-btn" id="update-btn">Update</button>
+            </div>
+            <div class="other-settings">
+                <button class="green-btn" id="race-btn">Race</button>
+                <button class="green-btn" id="reset-btn">Reset</button>
+                <button class="blue-btn" id="generate-btn">Generate Cars</button>
+            </div>
+        </section> -->
+
+      <!-- <section class="garage-section">
+            <h2>Garage (104)</h2>
+            <h3 id="page-num">Page #1</h3>
+            <div class="road-bg">
+                <div class="finish-line checkered"></div>
+                <div class="car-section">
+                    <div class="car-options-select">
+                        <button class="blue-btn select-btn">Select</button>
+                        <button class="blue-btn select-btn">Remove</button>
+                        <p class="car-name">Tesla</p>
+                    </div>
+                    <div class="car-options-select">
+                        <button class="move-btn play-btn">A</button>
+                        <button class="move-btn stop-btn">B</button>
+                    </div>
+                </div>
+                <div class="car-section"></div>
+                <div class="car-section"></div>
+                <div class="car-section"></div>
+            </div>
+        </section> -->
+    </main>
+
+    <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
+
+    <!-- <script>
+        // given this data from db
+        let color = "#6095ff";
+        let id = 2;
+
+        d3.xml("assets/car.svg").then((data) => {
+            // get svg element from imported data
+            let svgElement = data.documentElement;
+            // set color - get .body-color svg path and give it a fill color
+            let carBody = data.querySelector(".body-color");
+            carBody.style.fill = color;
+            // set a custom data attribute to svg element called "cid" using id
+            svgElement.dataset.cid = id;
+
+            // append to html car-section div using d3.js
+            d3.select(".car-section")
+                .node().append(svgElement);
+        });
+    </script> -->
+    <script src="api.js"></script>
+  </body>
+</html>
