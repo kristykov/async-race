@@ -1,0 +1,26 @@
+{
+  "name": "async-race",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.base.config.js",
+  "dependencies": {
+    "webpack-merge": "^5.8.0"
+  },
+  "devDependencies": {
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.3",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2",
+    "html-webpack-plugin": "^5.2.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^4.5.1"
+  },
+  "scripts": {
+    "start": "webpack serve --open --config ./webpack.config.js --env mode=dev",
+    "build": "webpack --config ./webpack.config.js --env mode=prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
