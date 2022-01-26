@@ -150,6 +150,13 @@ nav {
   color: var(--green-bg);
 }
 
+.play-btn[disabled],
+.play-btn:disabled {
+  border-color: #777777;
+  color: #777777;
+  pointer-events: none;
+}
+
 .stop-btn {
   border: 2px solid #a55460a8;
   color: #a55460a8;
