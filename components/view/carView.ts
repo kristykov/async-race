@@ -33,7 +33,6 @@ class CarView extends AbstractComponentView {
     const finishLine = document.createElement('div');
     finishLine.classList.add('finish-line', 'checkered');
     carsContainer.appendChild(finishLine);
-    console.log(data);
 
     data.forEach((car) => {
       const carSection = document.createElement('div');
