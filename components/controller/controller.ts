@@ -8,11 +8,7 @@ import { IWinners } from '../interfaces/IWinners';
 class Controller {
   model: Model;
   view: AppView;
-  animations: {
-    [carId: string]: {
-      id: number | null;
-    };
-  } = {};
+  animations: { [carId: string]: { id: number | null } } = {};
 
   constructor() {
     this.model = new Model();
@@ -41,6 +37,8 @@ class Controller {
       this.view.garageView.currentPageNum = parseInt(page);
       // (1) get garage data
       data = await this.model.getCars(page);
+      console.log(data);
+
       // (2) give data to view
       this.view.currentView = this.view.garageView;
       //
@@ -62,31 +60,31 @@ class Controller {
     this.view.currentView.draw(data);
   }
 
-  createCar(name: string, color: string) {
+  async createCar(name: string, color: string) {
     const data = {
       name: name,
       color: color,
       id: ++this.model.idCounter,
     };
 
-    this.model.createCar(data);
+    await this.model.createCar(data);
     this.refreshPage();
-    //then get a car and draw it
   }
 
-  updateCar(name: string, color: string, id: number) {
+  async updateCar(name: string, color: string, id: number) {
     const data = {
       name: name,
       color: color,
       id: id,
     };
 
-    this.model.updateCar(id.toString(), data);
+    await this.model.updateCar(id.toString(), data);
     this.refreshPage();
   }
 
-  removeCar(id: number) {
-    this.model.deleteCar(id.toString());
+  async removeCar(id: number) {
+    await this.model.deleteCar(id.toString());
+    await this.model.deleteWinner(id.toString());
     this.refreshPage();
   }
 
@@ -153,6 +151,7 @@ class Controller {
     const stopBtn = document.querySelector(
       `button[data-engine-stop-id="${carId}"]`
     ) as HTMLButtonElement;
+    stopBtn.disabled = true;
 
     await this.model.stopEngine(carId);
     const car = document.querySelector(
@@ -192,8 +191,9 @@ class Controller {
     if (success) {
       const flag = document.querySelector('.finish-line') as HTMLElement;
       const htmlDist = Math.floor(context.getDistElem(car, flag));
+      console.log(car, htmlDist, time);
 
-      this.animations[carId] = context.animation(car, htmlDist, time);
+      context.animations[carId] = context.animation(car, htmlDist, time);
     }
     return { success, carId, time };
   }
