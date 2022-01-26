@@ -25,6 +25,9 @@ class Controller {
     window.addEventListener('hashchange', async () => {
       this.refreshPage();
     });
+    console.log(
+      'При нажатии на Race или кнопку A для одной машины, подождите, пожалуйста, ответа сервера'
+    );
   }
 
   async refreshPage(page = '1') {
@@ -37,7 +40,6 @@ class Controller {
       this.view.garageView.currentPageNum = parseInt(page);
       // (1) get garage data
       data = await this.model.getCars(page);
-      console.log(data);
 
       // (2) give data to view
       this.view.currentView = this.view.garageView;
@@ -191,7 +193,6 @@ class Controller {
     if (success) {
       const flag = document.querySelector('.finish-line') as HTMLElement;
       const htmlDist = Math.floor(context.getDistElem(car, flag));
-      console.log(car, htmlDist, time);
 
       context.animations[carId] = context.animation(car, htmlDist, time);
     }
