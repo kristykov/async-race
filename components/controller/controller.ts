@@ -199,7 +199,7 @@ class Controller {
     return { success, carId, time };
   }
 
-  animation(car: HTMLElement, distance: any, animationTime: number) {
+  animation(car: HTMLElement, distance: number, animationTime: number) {
     // distance is html distance from car to flag/finish-line
 
     let start: number | null = null;
@@ -249,7 +249,7 @@ class Controller {
     startDriving: (
       carId: string,
       context: this
-    ) => Promise<{ success: any; carId: string; time: number }>
+    ) => Promise<{ success: boolean; carId: string; time: number }>
   ) {
     const promises = this.model.carsData?.map(({ id }) => {
       return startDriving(id.toString(), this);
@@ -264,7 +264,7 @@ class Controller {
 
   async raceAll1(
     promises:
-      | Promise<{ success: any; carId: string; time: number }>[]
+      | Promise<{ success: boolean; carId: string; time: number }>[]
       | undefined,
     carIds: number[] | undefined
   ): Promise<
